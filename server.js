@@ -1,5 +1,5 @@
 const express = require('express');
-const pg = require('pg');
+const { Client } = require('pg');
 const app = express();
 const port = 8080;
 
