@@ -1,12 +1,49 @@
 const express = require('express');
+const pg = require('pg');
 const app = express();
 const port = 8080;
 
 app.get('/', async (req, res) => {
-    res.setHeader('Content-Type', 'text/html');
+    res.setHeader("Content-Type", "text/html");
     res.status(200);
     res.send("<h1>Welcome To Express</h1>");
 });
+
+// Connecting to Postgres database
+// authentication values like 'root' and 'postgres' will defined in 'docker-compose.yml'
+const client = new Client({
+    password: "root",
+    user: "root",
+    host: "postgres",
+});
+
+// Serves a folder called 'public
+app.use(express.static("public"));
+
+// GET request to /employees
+app.get("/employees", async (req, res) => {
+    const results = await client
+       .query("SELECT * FROM employees")
+       .then((payload) => {
+            return payload.rows;
+        })
+        .catch(() => {
+            throw new Error("Query Failed!");
+        });
+    res.setHeader("Content-Type", "application/json");
+    res.status(200);
+    res.send(JSON.stringify(results));
+});
+
+// Connect to the database before it starts
+// using IIFE (Immediately Invoked Function Expression) async for the database connection to establish before listening
+(async () => {
+    await client.connect();
+
+    app.listen(port, () => {
+        console.log(`Server listening at http://localhost:${port}`);
+    });
+})();
 
 // Create Promise will return error on node > v15 :)
 // const promise = new Promise((resolve, reject) => {
@@ -17,9 +54,6 @@ app.get('/', async (req, res) => {
 // });
 
 // promise.then(() => {
-//     console.log('this will never run!');
-// });
-
-app.listen(port, () => {
-    console.log(`Server listening at http://localhost:${port}`);
-});
+    //     console.log('this will never run!');
+    // });
+    
