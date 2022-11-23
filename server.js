@@ -8,7 +8,7 @@ app.get('/', async (req, res) => {
     res.send("<h1>Welcome To Express</h1>");
 });
 
-// Create Promise will return error on node > v15
+// Create Promise will return error on node > v15 :)
 // const promise = new Promise((resolve, reject) => {
 //     setTimeout(() => {
 //         resolve('Hello World');
