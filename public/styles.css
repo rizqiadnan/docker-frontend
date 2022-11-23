@@ -1,7 +1,7 @@
 body {
     padding: 12px;
     display: flex;
-    flex-direction: center;
+    flex-direction: row;
     column-gap: 24px;
 }
 

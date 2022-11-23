@@ -3,11 +3,11 @@ const { Client } = require('pg');
 const app = express();
 const port = 8080;
 
-app.get('/', async (req, res) => {
-    res.setHeader("Content-Type", "text/html");
-    res.status(200);
-    res.send("<h1>Welcome To Express</h1>");
-});
+// app.get('/', async (req, res) => {
+//     res.setHeader("Content-Type", "text/html");
+//     res.status(200);
+//     res.send("<h1>Welcome To Express</h1>");
+// });
 
 // Connecting to Postgres database
 // authentication values like 'root' and 'postgres' will defined in 'docker-compose.yml'
@@ -17,8 +17,9 @@ const client = new Client({
     host: "postgres",
 });
 
-// Serves a folder called 'public
+// Serves a folder called 'public' and 'assets'
 app.use(express.static("public"));
+app.use(express.static("assets"));
 
 // GET request to /employees
 app.get("/employees", async (req, res) => {
@@ -57,3 +58,13 @@ app.get("/employees", async (req, res) => {
     //     console.log('this will never run!');
     // });
     
+// const myPromise = new Promise((resolve, reject) => {
+//     setTimeout(() => {
+//       resolve("foo");
+//       }, 300);
+//       reject("oops");
+//     });
+      
+//     myPromise.then(() => {
+//     console.log("hello");
+// });
