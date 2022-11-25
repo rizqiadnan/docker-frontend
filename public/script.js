@@ -1,15 +1,18 @@
 fetch("/employees")
-    .then((response) => response.json())
-    .then((data) => {
-        // data = JSON.parse(data);
-        data.quotesArray.forEeach((employee) => {
-            const cardTemplate = document.querySelector('template');
+  .then((response) => response.json())
+  .then((data) => {
+    data.forEach((employee) => {
+      // Select the <template> we created in index.html
+      const cardTemplate = document.querySelector('template');
 
-            const card = cardTemplate.content.cloneNode(true);
+      // Clone a copy of the template we can insert in the DOM as a real visible node
+      const card = cardTemplate.content.cloneNode(true);
 
-            card.querySelector('h4').innerText = employee.name;
-            card.querySelector('p').innerText = employee.title;
+      // Update the content of the cloned template with the employee data we queried from the backend
+      card.querySelector('h4').innerText = employee.name;
+      card.querySelector('p').innerText = employee.title;
 
-            document.body.appendChild(card);
-        });       
+      // Append the card as a child with the employee data to the <body> element on our page
+      document.body.appendChild(card);
     });
+  });
