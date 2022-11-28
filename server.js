@@ -1,4 +1,5 @@
 const express = require('express');
+const helmet = require('helmet');
 const { Client } = require('pg');
 const app = express();
 const port = 8080;
@@ -8,6 +9,12 @@ const port = 8080;
 //     res.status(200);
 //     res.send("<h1>Welcome To Express</h1>");
 // });
+
+// disable 'x-powered-by'
+// app.disable("x-powered-by");
+
+// use helmet
+app.use(helmet());
 
 // Connecting to Postgres database
 // authentication values like 'root' and 'postgres' will defined in 'docker-compose.yml'
