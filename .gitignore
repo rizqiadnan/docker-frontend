@@ -1,3 +1,6 @@
 # Ignore files
 node_modules
 npm-debug.log
+
+# IGNORE ENV
+.env

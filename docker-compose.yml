@@ -16,9 +16,9 @@ services:
     environment:
       # Our Node app will use these to connect
       # to the database
-      - POSTGRES_USER=root
-      - POSTGRES_PASSWORD=root
-      - POSTGRES_DB=root
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
     ports:
       # Default port for PostgreSQL database
       - "5432:5432"
@@ -28,8 +28,8 @@ services:
   pgadmin-compose:
     image: dpage/pgadmin4
     environment:
-      - PGADMIN_DEFAULT_EMAIL=rizkyadnan23@gmail.com
-      - PGADMIN_DEFAULT_PASSWORD=rizkyadnan08
+      - PGADMIN_DEFAULT_EMAIL=${PGADMIN_DEFAULT_EMAIL}
+      - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_DEFAULT_PASSWORD}
     ports:
       - "16543:80"
     depends_on:
